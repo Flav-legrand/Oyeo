@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>Connexion OYEO...</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background: #f0f4f8;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .spinner {
+            border: 4px solid #f3f3f3;
+            border-top: 4px solid #1a3a6b;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 20px auto;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>🔐 Connexion en cours...</h2>
+        <div class="spinner"></div>
+        <p>Authentification réussie ! Redirection vers OYEO...</p>
+    </div>
+
+    <script>
+        // Récupérer le code d'autorisation depuis l'URL
+        const params = new URLSearchParams(window.location.search);
+        const code = params.get('code');
+
+        if (code) {
+            // Stocker le code dans le stockage local pour l'utiliser dans l'application Flutter
+            localStorage.setItem('oyeo_auth_code', code);
+            localStorage.setItem('oyeo_auth_time', Date.now());
+            
+            // Rediriger vers l'application principale
+            window.location.href = '/Oyeo/';
+        } else {
+            // Si aucun code n'est trouvé, retourner à l'accueil
+            window.location.href = '/Oyeo/';
+        }
+    </script>
+</body>
+</html>
